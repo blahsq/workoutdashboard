@@ -57,6 +57,15 @@ Ta forma jest wygodniejsza w iOS Shortcuts, gdzie budowanie ciała JSON bywa zaw
 Każda odpowiedź (także błędna) zawiera pole `summary` — gotowy tekst po polsku do pokazania
 w powiadomieniu, dzięki czemu skrót na telefonie nie musi rozgałęziać się na przypadki.
 
+Jeśli w pakiecie jest już trening z tą samą datą, żądanie zwraca `200` z `duplicate: true`
+i **nie** zapisuje drugiego wpisu — dzięki temu skrót na telefonie nie potrzebuje żadnego
+klucza ani zmiennej w adresie. Dwa treningi tego samego dnia zapiszesz przez `allowSameDay`:
+
+```bash
+curl -X POST "https://<app>.vercel.app/api/sessions?allowSameDay=true" \
+  -H "Authorization: Bearer $WORKOUT_TOKEN"
+```
+
 Zajmuje pierwszy wolny slot aktualnego pakietu. Gdy pakiet jest wyczerpany, zwraca
 `409 package_exhausted` — nowy pakiet trzeba założyć jawnie.
 
@@ -109,3 +118,12 @@ i dopisuje „dane offline" w podtytule — dashboard nigdy nie pokazuje pustej 
 vercel dev            # front + funkcje
 python3 -m http.server 8000   # sam front (API 404 -> dane zapasowe)
 ```
+
+## Testy
+
+```bash
+npm test
+```
+
+Handlery są uruchamiane na atrapie Upstasha (bez sieci i bez bazy) — sprawdzają autoryzację,
+walidację dat, ochronę przed dublem, cofanie i granice pakietu.

@@ -2,5 +2,8 @@
   "name": "workoutdashboard",
   "private": true,
   "type": "module",
-  "description": "Dashboard pakietu treningów personalnych — statyczny front + Vercel Functions"
+  "description": "Dashboard pakietu treningów personalnych — statyczny front + Vercel Functions",
+  "scripts": {
+    "test": "node test/api.test.mjs && node test/sameday.test.mjs && node test/query.test.mjs"
+  }
 }

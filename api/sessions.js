@@ -56,6 +56,20 @@ async function logSession(req, res) {
       { packageId: pkg.id, size: pkg.size });
   }
 
+  // Ochrona przed dublem oparta o samą datę — dzięki temu skrót na telefonie
+  // nie musi generować żadnego klucza i ma w pełni statyczny adres.
+  const sameDay = pkg.sessions.find(s => s.date === date);
+  if (sameDay && q.allowSameDay !== "true" && body.allowSameDay !== true) {
+    const remaining = pkg.size - pkg.sessions.length;
+    return json(res, 200, {
+      duplicate: true,
+      summary: `Trening z ${date} jest już zapisany (nr ${sameDay.n}). Zostało ${remaining}.`,
+      remaining,
+      session: sameDay,
+      state
+    });
+  }
+
   const session = {
     n: pkg.sessions.length + 1,
     date,

@@ -1,19 +1,22 @@
-// Mock data — docelowo do podmiany na realne źródło (API / Sheets / DB)
-const PACKAGE_DATA = {
+// Fallback używany, gdy /api/state nie odpowiada (np. otwarcie index.html z dysku).
+// Kształt identyczny jak odpowiedź API — front ma jedną ścieżkę renderowania.
+const FALLBACK_STATE = {
+  schema: 1,
   client: "Krzysztof",
   trainer: "Łukasz",
-  packageSize: 10,
-  purchasedAt: "2026-07-09",
-  sessions: [
-    { n: 1,  date: "2026-07-09", done: true },
-    { n: 2,  date: "2026-07-23", done: true },
-    { n: 3,  date: "2026-07-30", done: true },
-    { n: 4,  date: "2026-08-04", done: true },
-    { n: 5,  date: "2026-08-13", done: true },
-    { n: 6,  date: "2026-08-20", done: true },
-    { n: 7,  date: null, done: false },
-    { n: 8,  date: null, done: false },
-    { n: 9,  date: null, done: false },
-    { n: 10, date: null, done: false }
+  packages: [
+    {
+      id: "2026-07",
+      size: 10,
+      purchasedAt: "2026-07-09",
+      sessions: [
+        { n: 1, date: "2026-07-09" },
+        { n: 2, date: "2026-07-23" },
+        { n: 3, date: "2026-07-30" },
+        { n: 4, date: "2026-08-04" },
+        { n: 5, date: "2026-08-13" },
+        { n: 6, date: "2026-08-20" }
+      ]
+    }
   ]
 };

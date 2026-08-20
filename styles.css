@@ -91,9 +91,8 @@ h1 { font-size: 52px; font-weight: 800; letter-spacing: -0.02em; }
   height: 100%; width: 0; border-radius: 999px; background: #ffffff;
   transition: width .9s cubic-bezier(.2,.8,.2,1);
 }
-.bar-meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
-.bar-meta h2 { margin-top: 10px; }
-.bar-meta .muted { text-align: right; margin: 0; }
+.bar-top .muted { margin-top: 14px; }
+.bar-meta h2 { margin-top: 8px; white-space: nowrap; }
 
 /* slots card */
 .card--slots { grid-column: 1 / -1; gap: 24px; }

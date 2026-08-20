@@ -87,7 +87,16 @@ h1 { font-size: 52px; font-weight: 800; letter-spacing: -0.02em; }
 }
 .card--stat .ring { flex: 0 0 auto; }
 .stat-body { display: flex; flex-direction: column; }
-.stat-body h2 { margin-top: 12px; }
+.stat-body h2 { margin-top: 0; }
+
+/* pierścień z licznikiem w środku */
+.ring--stat { width: 200px; height: 200px; }
+.ring-stat {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ring-stat .stat-value { font-size: 56px; }
+.ring-stat .stat-unit { font-size: 20px; }
 .stat { display: flex; align-items: baseline; gap: 10px; }
 .stat-value { font-size: 84px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
 .stat-value.small { font-size: 56px; }
@@ -170,8 +179,10 @@ h1 { font-size: 52px; font-weight: 800; letter-spacing: -0.02em; }
   .card--ring { gap: 20px; }
   .card--stat { gap: 22px; padding: 24px; }
   .ring { width: 96px; height: 96px; }
+  .ring--stat { width: 128px; height: 128px; }
   .ring-value { font-size: 34px; }
-  .stat-body h2 { margin-top: 8px; }
+  .ring-stat .stat-value { font-size: 36px; }
+  .ring-stat .stat-unit { font-size: 14px; }
 
   .stat-value { font-size: 52px; }
   .stat-value.small { font-size: 42px; }

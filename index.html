@@ -37,16 +37,17 @@
       -->
 
       <article class="card card--stat">
-        <div class="ring" id="ring">
+        <div class="ring ring--stat" id="ring">
           <svg viewBox="0 0 120 120" aria-hidden="true">
             <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
             <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="52"></circle>
           </svg>
-          <span class="ring-value" id="remaining">0</span>
+          <div class="ring-stat">
+            <div class="stat"><span class="stat-value" id="usedValue">0</span><span class="stat-unit" id="usedUnit">/ 10</span></div>
+          </div>
         </div>
         <div class="stat-body">
-          <div class="stat"><span class="stat-value" id="usedValue">0</span><span class="stat-unit" id="usedUnit">/ 10</span></div>
-          <h2>Wykorzystane</h2>
+          <h2>Wykorzystane treningi</h2>
           <p class="muted" id="usedSub">—</p>
         </div>
       </article>

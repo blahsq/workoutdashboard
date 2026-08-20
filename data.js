@@ -1,7 +1,7 @@
 // Mock data — docelowo do podmiany na realne źródło (API / Sheets / DB)
 const PACKAGE_DATA = {
   client: "Krzysztof",
-  trainer: "Michał K.",
+  trainer: "Łukasz",
   packageSize: 10,
   purchasedAt: "2026-07-09",
   sessions: [

@@ -77,8 +77,17 @@ h1 { font-size: 52px; font-weight: 800; letter-spacing: -0.02em; }
   font-size: 46px; font-weight: 700; letter-spacing: -0.02em;
 }
 
-/* stat card */
-.card--stat { justify-content: space-between; gap: 40px; }
+/* stat card — pełna szerokość, pierścień obok liczby */
+.card--stat {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 44px;
+  padding: 40px;
+}
+.card--stat .ring { flex: 0 0 auto; }
+.stat-body { display: flex; flex-direction: column; }
+.stat-body h2 { margin-top: 12px; }
 .stat { display: flex; align-items: baseline; gap: 10px; }
 .stat-value { font-size: 84px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
 .stat-value.small { font-size: 56px; }
@@ -134,7 +143,6 @@ h1 { font-size: 52px; font-weight: 800; letter-spacing: -0.02em; }
 @media (max-width: 1000px) {
   body { padding: 44px 28px 64px; }
   .grid { grid-template-columns: 1fr 1fr; }
-  .card--progress { grid-column: 1 / -1; }
   .slots { grid-template-columns: repeat(3, 1fr); }
 }
 
@@ -158,12 +166,14 @@ h1 { font-size: 52px; font-weight: 800; letter-spacing: -0.02em; }
   .card h2 { font-size: 19px; }
   .muted { font-size: 14px; }
 
-  /* karty statystyk: ten sam układ, tylko ciaśniej */
-  .card--ring, .card--stat { gap: 20px; }
-  .ring { width: 104px; height: 104px; }
-  .ring-value { font-size: 38px; }
+  /* karta statystyk: ten sam układ, tylko ciaśniej */
+  .card--ring { gap: 20px; }
+  .card--stat { gap: 22px; padding: 24px; }
+  .ring { width: 96px; height: 96px; }
+  .ring-value { font-size: 34px; }
+  .stat-body h2 { margin-top: 8px; }
 
-  .stat-value { font-size: 60px; }
+  .stat-value { font-size: 52px; }
   .stat-value.small { font-size: 42px; }
   .stat-unit { font-size: 20px; }
 

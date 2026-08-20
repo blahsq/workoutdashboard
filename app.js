@@ -3,7 +3,11 @@
     day: "numeric", month: "short", year: "numeric"
   });
 
-  const set = (id, text) => { document.getElementById(id).textContent = text; };
+  // Część kart bywa zakomentowana w index.html — brak elementu nie jest błędem.
+  const set = (id, text) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  };
 
   function render(state, { stale } = {}) {
     const pkg = state.packages[state.packages.length - 1];
@@ -29,9 +33,14 @@
     // pierścień pokazuje wykorzystaną część pakietu
     const C = 2 * Math.PI * 52;
     const ringFg = document.getElementById("ringFg");
-    ringFg.style.strokeDasharray = C;
-    requestAnimationFrame(() => { ringFg.style.strokeDashoffset = C * (1 - done / total); });
-    requestAnimationFrame(() => { document.getElementById("barFill").style.width = pct + "%"; });
+    if (ringFg) {
+      ringFg.style.strokeDasharray = C;
+      requestAnimationFrame(() => { ringFg.style.strokeDashoffset = C * (1 - done / total); });
+    }
+    const barFill = document.getElementById("barFill");
+    if (barFill) {
+      requestAnimationFrame(() => { barFill.style.width = pct + "%"; });
+    }
 
     const slots = Array.from({ length: total }, (_, i) => pkg.sessions[i] || null);
     document.getElementById("slots").innerHTML = slots.map((s, i) => `

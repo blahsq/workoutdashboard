@@ -45,6 +45,15 @@ curl -X POST https://<app>.vercel.app/api/sessions \
 | `date` | nie | dzisiaj (Europe/Warsaw) |
 | `idempotencyKey` | nie | brak — bez niej powtórzone żądanie zapisze drugi trening |
 
+Oba pola można podać także w query stringu, wtedy żądanie nie potrzebuje ciała w ogóle:
+
+```bash
+curl -X POST "https://<app>.vercel.app/api/sessions?idempotencyKey=2026-08-27" \
+  -H "Authorization: Bearer $WORKOUT_TOKEN"
+```
+
+Ta forma jest wygodniejsza w iOS Shortcuts, gdzie budowanie ciała JSON bywa zawodne.
+
 Każda odpowiedź (także błędna) zawiera pole `summary` — gotowy tekst po polsku do pokazania
 w powiadomieniu, dzięki czemu skrót na telefonie nie musi rozgałęziać się na przypadki.
 

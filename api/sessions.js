@@ -18,15 +18,19 @@ export default async function handler(req, res) {
 async function logSession(req, res) {
   requireAuth(req);
   const body = readBody(req);
+  // Parametry przyjmujemy też z query stringa — skrót na iOS może wtedy wysłać
+  // żądanie bez ciała JSON, co eliminuje najbardziej awaryjny element konfiguracji.
+  const q = req.query ?? {};
 
-  const date = body.date ?? todayInWarsaw();
+  const date = q.date ?? body.date ?? todayInWarsaw();
   if (!validDate(date)) {
     throw new HttpError(400, "invalid_date", "Pole 'date' musi mieć format YYYY-MM-DD.");
   }
 
   // Powtórka tego samego żądania nie zjada drugiego treningu z pakietu.
-  if (body.idempotencyKey) {
-    const fresh = await claimIdempotencyKey(String(body.idempotencyKey));
+  const idempotencyKey = q.idempotencyKey ?? body.idempotencyKey;
+  if (idempotencyKey) {
+    const fresh = await claimIdempotencyKey(String(idempotencyKey));
     if (!fresh) {
       const state = await getState();
       const pkg = currentPackage(state);

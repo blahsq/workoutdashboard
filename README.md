@@ -45,6 +45,9 @@ curl -X POST https://<app>.vercel.app/api/sessions \
 | `date` | nie | dzisiaj (Europe/Warsaw) |
 | `idempotencyKey` | nie | brak — bez niej powtórzone żądanie zapisze drugi trening |
 
+Każda odpowiedź (także błędna) zawiera pole `summary` — gotowy tekst po polsku do pokazania
+w powiadomieniu, dzięki czemu skrót na telefonie nie musi rozgałęziać się na przypadki.
+
 Zajmuje pierwszy wolny slot aktualnego pakietu. Gdy pakiet jest wyczerpany, zwraca
 `409 package_exhausted` — nowy pakiet trzeba założyć jawnie.
 

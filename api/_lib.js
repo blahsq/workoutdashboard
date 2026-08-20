@@ -104,10 +104,10 @@ export function json(res, status, payload) {
 
 export function fail(res, err) {
   if (err instanceof HttpError) {
-    return json(res, err.status, { error: err.code, message: err.message, ...err.extra });
+    return json(res, err.status, { error: err.code, message: err.message, summary: err.message, ...err.extra });
   }
   console.error(err);
-  return json(res, 500, { error: "internal_error", message: "Nieoczekiwany błąd." });
+  return json(res, 500, { error: "internal_error", message: "Nieoczekiwany błąd.", summary: "Nieoczekiwany błąd." });
 }
 
 export function methodNotAllowed(res, allowed) {

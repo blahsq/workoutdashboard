@@ -29,7 +29,14 @@ async function logSession(req, res) {
     const fresh = await claimIdempotencyKey(String(body.idempotencyKey));
     if (!fresh) {
       const state = await getState();
-      return json(res, 200, { duplicate: true, state });
+      const pkg = currentPackage(state);
+      const remaining = pkg ? pkg.size - pkg.sessions.length : 0;
+      return json(res, 200, {
+        duplicate: true,
+        summary: `Ten trening był już zapisany. Zostało ${remaining}.`,
+        remaining,
+        state
+      });
     }
   }
 
@@ -53,7 +60,13 @@ async function logSession(req, res) {
   pkg.sessions.push(session);
   await setState(state);
 
-  return json(res, 201, { session, remaining: pkg.size - pkg.sessions.length, state });
+  const remaining = pkg.size - pkg.sessions.length;
+  return json(res, 201, {
+    session,
+    summary: `Zaliczone. Zostało ${remaining} z ${pkg.size}.`,
+    remaining,
+    state
+  });
 }
 
 /**
@@ -83,5 +96,11 @@ async function undoSession(req, res) {
   pkg.sessions.forEach((s, i) => { s.n = i + 1; });
   await setState(state);
 
-  return json(res, 200, { removed, remaining: pkg.size - pkg.sessions.length, state });
+  const remainingAfterUndo = pkg.size - pkg.sessions.length;
+  return json(res, 200, {
+    removed,
+    summary: `Cofnięto trening z ${removed.date}. Zostało ${remainingAfterUndo}.`,
+    remaining: remainingAfterUndo,
+    state
+  });
 }

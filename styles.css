@@ -1,0 +1,137 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0b;
+  --card: #17181a;
+  --card-2: #1f2023;
+  --line: #2a2b2f;
+  --text: #f5f6f7;
+  --muted: #85878d;
+  --dim: #4a4c52;
+  --radius: 28px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 56px 40px 80px;
+}
+
+.shell { width: 100%; max-width: 1180px; }
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+h1 { font-size: 52px; font-weight: 800; letter-spacing: -0.02em; }
+.sub { color: var(--muted); font-size: 16px; margin-top: 6px; }
+
+.pill {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+.muted { color: var(--muted); font-size: 15px; margin-top: 4px; }
+
+/* ring card */
+.card--ring { justify-content: space-between; gap: 40px; }
+.ring { position: relative; width: 132px; height: 132px; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: var(--card-2); stroke-width: 8; }
+.ring-fg {
+  fill: none; stroke: #ffffff; stroke-width: 8; stroke-linecap: round;
+  stroke-dasharray: 326.7; stroke-dashoffset: 326.7;
+  transition: stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1);
+}
+.ring-value {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 46px; font-weight: 700; letter-spacing: -0.02em;
+}
+
+/* stat card */
+.card--stat { justify-content: space-between; gap: 40px; }
+.stat { display: flex; align-items: baseline; gap: 10px; }
+.stat-value { font-size: 84px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.stat-value.small { font-size: 56px; }
+.stat-unit { font-size: 28px; font-weight: 700; color: var(--dim); }
+
+/* progress card */
+.card--progress { justify-content: space-between; gap: 40px; }
+.bar { height: 14px; border-radius: 999px; background: var(--card-2); overflow: hidden; }
+.bar-fill {
+  height: 100%; width: 0; border-radius: 999px; background: #ffffff;
+  transition: width .9s cubic-bezier(.2,.8,.2,1);
+}
+.bar-meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.bar-meta h2 { margin-top: 10px; }
+.bar-meta .muted { text-align: right; margin: 0; }
+
+/* slots card */
+.card--slots { grid-column: 1 / -1; gap: 24px; }
+.slots-head { display: flex; align-items: baseline; justify-content: space-between; }
+.slots-head .muted { margin: 0; }
+
+.slots { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+
+.slot {
+  background: var(--card-2);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.slot-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1.5px solid var(--dim);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: var(--muted);
+}
+.slot-focus { font-size: 15px; font-weight: 600; color: var(--muted); }
+.slot-date { font-size: 13px; color: var(--dim); margin-top: 2px; }
+
+.slot.is-done {
+  background: #f5f6f7;
+  color: #0a0a0b;
+}
+.slot.is-done .slot-num {
+  background: #0a0a0b; border-color: #0a0a0b; color: #f5f6f7;
+}
+.slot.is-done .slot-focus { color: #0a0a0b; }
+.slot.is-done .slot-date { color: #5d6067; }
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+  .slots { grid-template-columns: repeat(3, 1fr); }
+}

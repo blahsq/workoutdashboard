@@ -34,10 +34,7 @@
   document.getElementById("slots").innerHTML = d.sessions.map(s => `
     <li class="slot${s.done ? " is-done" : ""}">
       <span class="slot-num">${s.n}</span>
-      <div>
-        <p class="slot-focus">${s.done ? s.focus : "Wolny"}</p>
-        <p class="slot-date">${s.done ? fmt(s.date) : "do wykorzystania"}</p>
-      </div>
+      <p class="slot-focus">${s.done ? fmt(s.date) : "Wolny"}</p>
     </li>
   `).join("");
 })();
